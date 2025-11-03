@@ -8,7 +8,6 @@ export default function SignUpPage() {
     fullName: "",
     email: "",
     password: "",
-    
     confirmPassword: "",
     agreeToTerms: false,
     newsletter: true,
@@ -112,40 +111,40 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden p-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden overflow-y-auto py-6 px-4">
       {/* Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -inset-10 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 md:w-72 md:h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/4 w-48 h-48 md:w-72 md:h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-48 h-48 md:w-72 md:h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
         </div>
       </div>
 
       {/* Form Container */}
-      <div className="relative w-full max-w-md mx-auto">
+      <div className="relative w-full max-w-md my-auto">
         <div className="bg-gray-900/90 backdrop-blur-lg border border-gray-700 rounded-2xl shadow-2xl overflow-hidden w-full">
-          <div className="h-2 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+          <div className="h-1 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
 
-          <div className="p-8">
+          <div className="p-5 sm:p-6">
             {/* Header with Logo */}
-            <div className="text-center mb-8">
-              <div className="flex justify-center mb-4">
-                <div className="w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <i className="fa-solid fa-user-plus text-white text-3xl"></i>
+            <div className="text-center mb-4">
+              <div className="flex justify-center mb-2">
+                <div className="w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <i className="fa-solid fa-user-plus text-white text-xl"></i>
                 </div>
               </div>
-              <h1 className="text-3xl font-bold text-white mb-2">
+              <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
                 Join <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">TravelNudge</span>
               </h1>
-              <p className="text-gray-300 text-lg">Create your account and start your journey</p>
+              <p className="text-gray-300 text-xs sm:text-sm">Create your account and start your journey</p>
             </div>
 
             {/* Signup Form */}
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-3">
               {/* Full Name */}
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="fullName" className="block text-xs font-medium text-gray-300 mb-1">
                   Full Name
                 </label>
                 <input
@@ -155,14 +154,14 @@ export default function SignUpPage() {
                   placeholder="Enter your full name"
                   value={formData.fullName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
                   required
                 />
               </div>
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-xs font-medium text-gray-300 mb-1">
                   Email Address
                 </label>
                 <input
@@ -172,14 +171,14 @@ export default function SignUpPage() {
                   placeholder="Enter your email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
                   required
                 />
               </div>
 
               {/* Password */}
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="password" className="block text-xs font-medium text-gray-300 mb-1">
                   Password
                 </label>
                 <input
@@ -189,12 +188,12 @@ export default function SignUpPage() {
                   placeholder="Create a password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
                   required
                 />
                 {/* Password Strength Bar */}
                 {formData.password && (
-                  <div className="mt-3">
+                  <div className="mt-2">
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-gray-400">Password strength:</span>
                       <span
@@ -211,9 +210,9 @@ export default function SignUpPage() {
                         {getPasswordStrengthText(passwordStrength)}
                       </span>
                     </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
+                    <div className="w-full bg-gray-700 rounded-full h-1.5">
                       <div
-                        className={`h-2 rounded-full transition-all duration-300 ${getPasswordStrengthColor(
+                        className={`h-1.5 rounded-full transition-all duration-300 ${getPasswordStrengthColor(
                           passwordStrength
                         )}`}
                         style={{ width: `${(passwordStrength / 4) * 100}%` }}
@@ -225,7 +224,7 @@ export default function SignUpPage() {
 
               {/* Confirm Password */}
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="confirmPassword" className="block text-xs font-medium text-gray-300 mb-1">
                   Confirm Password
                 </label>
                 <input
@@ -235,21 +234,21 @@ export default function SignUpPage() {
                   placeholder="Confirm password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="w-full px-3 py-2 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent text-sm"
                   required
                 />
               </div>
 
               {/* Terms Checkbox */}
-              <div className="flex items-start space-x-3">
+              <div className="flex items-start space-x-2 pt-1">
                 <input
                   type="checkbox"
                   name="agreeToTerms"
                   checked={formData.agreeToTerms}
                   onChange={handleChange}
-                  className="mt-1 w-4 h-4 text-cyan-500 bg-gray-800 border-gray-600 rounded focus:ring-cyan-500 focus:ring-2"
+                  className="mt-0.5 w-4 h-4 text-cyan-500 bg-gray-800 border-gray-600 rounded focus:ring-cyan-500 focus:ring-2"
                 />
-                <label htmlFor="agreeToTerms" className="text-sm text-gray-300">
+                <label htmlFor="agreeToTerms" className="text-xs text-gray-300">
                   I agree to the{" "}
                   <a href="#" className="text-cyan-400 hover:text-cyan-300">
                     Terms of Service
@@ -265,9 +264,9 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 disabled={loading || !formData.agreeToTerms}
-                className={`w-full py-4 px-6 rounded-lg text-white font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
+                className={`w-full py-2.5 px-6 rounded-xl text-white font-semibold transition-all duration-300 flex items-center justify-center space-x-2 text-sm ${
                   formData.agreeToTerms && !loading
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transform hover:scale-105 shadow-lg hover:shadow-cyan-500/25"
+                    ? "bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-500/25"
                     : "bg-gray-700 cursor-not-allowed opacity-50"
                 }`}
               >
@@ -286,8 +285,8 @@ export default function SignUpPage() {
             </form>
 
             {/* Already have an account */}
-            <div className="mt-6 text-center">
-              <p className="text-gray-400">
+            <div className="mt-4 text-center">
+              <p className="text-gray-400 text-xs">
                 Already have an account?{" "}
                 <Link
                   to="/signin"
@@ -298,6 +297,17 @@ export default function SignUpPage() {
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Back to Home */}
+        <div className="text-center mt-3">
+          <Link
+            to="/"
+            className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors duration-200 text-xs"
+          >
+            <i className="fa-solid fa-arrow-left text-sm"></i>
+            <span>Back to home</span>
+          </Link>
         </div>
       </div>
     </div>

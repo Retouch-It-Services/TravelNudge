@@ -21,6 +21,7 @@ export default function Landing() {
       localStorage.removeItem("came_from_home");
     }
   }, []);
+  
 
   const features = [
     {
@@ -387,9 +388,9 @@ export default function Landing() {
                   className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
                 >
                   <i className="fa-solid fa-right-to-bracket"></i>
-                  <span>Login to Your Account</span>
+                  <span>Sign In to Your Account</span>
                 </button>
-
+        
                 <button
                   onClick={handleSignUp}
                   className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-500/25 transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"

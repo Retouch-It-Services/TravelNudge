@@ -40,25 +40,20 @@ export default function SignInPage() {
       }
 
       const data = await response.json();
-      console.log("API Response:", data); // Debug: see what your backend returns
+      console.log("API Response:", data);
 
-      // Store JWT token and user data with the correct keys
-      localStorage.setItem("access_token", data.access_token); // Changed from "token" to "access_token"
+      localStorage.setItem("access_token", data.access_token);
       
-      // Also store user data - you need to get this from your API response
-      // If your API returns user data, use it. Otherwise create from email.
       let userData;
       
       if (data.user) {
-        // If your API returns user data
         userData = {
           full_name: data.user.full_name,
           email: data.user.email
         };
       } else {
-        // Fallback: create user data from email
         userData = {
-          full_name: formData.email.split('@')[0], // Use email prefix as name
+          full_name: formData.email.split('@')[0],
           email: formData.email
         };
       }
@@ -66,7 +61,7 @@ export default function SignInPage() {
       localStorage.setItem("user_data", JSON.stringify(userData));
 
       alert("✅ Login successful!");
-      navigate("/home"); // redirect to landing page (changed from "/home")
+      navigate("/home");
     } catch (error) {
       console.error("Login error:", error);
       alert(error.message);
@@ -76,115 +71,108 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden overflow-y-auto py-8 px-4">
       {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -inset-10 opacity-20">
-          <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+          <div className="absolute top-1/4 left-1/4 w-48 h-48 md:w-72 md:h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+          <div className="absolute top-1/3 right-1/4 w-48 h-48 md:w-72 md:h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 left-1/2 w-48 h-48 md:w-72 md:h-72 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
         </div>
       </div>
 
       {/* Main Container */}
-      <div className="relative w-full max-w-md mx-4">
+      <div className="relative w-full max-w-md my-auto">
         <div className="bg-gray-900/80 backdrop-blur-lg border border-gray-700 rounded-2xl shadow-2xl overflow-hidden">
           {/* Gradient Top Bar */}
-          <div className="h-2 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
+          <div className="h-1 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
 
-          <div className="p-8">
+          <div className="p-5 sm:p-6">
             {/* Header */}
-            <div className="text-center mb-8">
-              <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
-                  <i className="fa-solid fa-compass text-white text-2xl"></i>
+            <div className="text-center mb-4">
+              <div className="flex justify-center mb-2">
+                <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
+                  <i className="fa-solid fa-compass text-white text-lg"></i>
                 </div>
               </div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 Welcome Back
               </h1>
-              <p className="text-gray-400 mt-2">Sign in to your TravelNudge account</p>
+              <p className="text-gray-400 mt-1 text-xs sm:text-sm">Sign in to your TravelNudge account</p>
             </div>
 
             {/* Social Buttons */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              <button className="flex items-center justify-center space-x-2 px-4 py-3 border border-gray-600 rounded-xl hover:bg-gray-800/50 transition-all duration-200">
-                <i className="fa-brands fa-google text-red-400"></i>
-                <span className="text-sm font-medium">Google</span>
+            <div className="grid grid-cols-2 gap-2.5 mb-4">
+              <button className="flex items-center justify-center space-x-2 px-3 py-2 border border-gray-600 rounded-xl hover:bg-gray-800/50 transition-all duration-200 text-white">
+                <i className="fa-brands fa-google text-red-400 text-sm"></i>
+                <span className="text-xs font-medium">Google</span>
               </button>
-              <button className="flex items-center justify-center space-x-2 px-4 py-3 border border-gray-600 rounded-xl hover:bg-gray-800/50 transition-all duration-200">
-                <i className="fa-brands fa-apple text-gray-300"></i>
-                <span className="text-sm font-medium">Apple</span>
+              <button className="flex items-center justify-center space-x-2 px-3 py-2 border border-gray-600 rounded-xl hover:bg-gray-800/50 transition-all duration-200 text-white">
+                <i className="fa-brands fa-apple text-gray-300 text-sm"></i>
+                <span className="text-xs font-medium">Apple</span>
               </button>
             </div>
 
             {/* Divider */}
-            <div className="flex items-center my-6">
+            <div className="flex items-center my-4">
               <div className="flex-1 h-px bg-gray-600"></div>
-              <div className="px-3 text-gray-400 text-sm">or continue with email</div>
+              <div className="px-3 text-gray-400 text-xs">or continue with email</div>
               <div className="flex-1 h-px bg-gray-600"></div>
             </div>
-            
 
             {/* Sign In Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-3">
               {/* Email */}
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-sm font-medium text-gray-300">
+              <div className="space-y-1">
+                <label htmlFor="email" className="text-xs font-medium text-gray-300">
                   Email Address
                 </label>
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <i className="fa-solid fa-envelope text-gray-400"></i>
-                    </div>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                      required
-                    />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i className="fa-solid fa-envelope text-gray-400 text-sm"></i>
                   </div>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full pl-9 pr-3 py-2 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200 text-sm"
+                    required
+                  />
                 </div>
               </div>
 
               {/* Password */}
-              <div className="space-y-2">
+              <div className="space-y-1">
                 <div className="flex justify-between items-center">
-                  <label htmlFor="password" className="text-sm font-medium text-gray-300">
+                  <label htmlFor="password" className="text-xs font-medium text-gray-300">
                     Password
                   </label>
-                  <a href="#" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">
+                  <a href="#" className="text-xs text-cyan-400 hover:text-cyan-300 transition-colors">
                     Forgot password?
                   </a>
                 </div>
-                <div className="relative group">
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition duration-300"></div>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <i className="fa-solid fa-lock text-gray-400"></i>
-                    </div>
-                    <input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      className="w-full pl-10 pr-4 py-3 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
-                      required
-                    />
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i className="fa-solid fa-lock text-gray-400 text-sm"></i>
                   </div>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="w-full pl-9 pr-3 py-2 bg-gray-800/50 border border-gray-600 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200 text-sm"
+                    required
+                  />
                 </div>
               </div>
 
               {/* Remember Me */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center pt-1">
                 <label className="flex items-center space-x-2 cursor-pointer">
                   <input
                     type="checkbox"
@@ -194,7 +182,7 @@ export default function SignInPage() {
                     className="sr-only"
                   />
                   <div
-                    className={`w-5 h-5 border-2 rounded ${
+                    className={`w-4 h-4 border-2 rounded ${
                       formData.rememberMe
                         ? "bg-cyan-500 border-cyan-500"
                         : "border-gray-500"
@@ -204,7 +192,7 @@ export default function SignInPage() {
                       <i className="fa-solid fa-check text-white text-xs"></i>
                     )}
                   </div>
-                  <span className="text-sm text-gray-300">Remember me</span>
+                  <span className="text-xs text-gray-300">Remember me</span>
                 </label>
               </div>
 
@@ -212,11 +200,11 @@ export default function SignInPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-4 px-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 transform ${
+                className={`w-full py-2.5 px-6 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 transform ${
                   loading
                     ? "opacity-70 cursor-not-allowed"
-                    : "hover:shadow-2xl hover:shadow-cyan-500/25 hover:scale-105"
-                } flex items-center justify-center space-x-2`}
+                    : "hover:shadow-2xl hover:shadow-cyan-500/25 hover:scale-[1.02]"
+                } flex items-center justify-center space-x-2 text-sm`}
               >
                 {loading ? (
                   <i className="fa-solid fa-spinner fa-spin"></i>
@@ -230,8 +218,8 @@ export default function SignInPage() {
             </form>
 
             {/* Sign Up Link */}
-            <div className="mt-8 text-center">
-              <p className="text-gray-400">
+            <div className="mt-4 text-center">
+              <p className="text-gray-400 text-xs">
                 Don't have an account?{" "}
                 <Link
                   to="/signup"
@@ -243,9 +231,9 @@ export default function SignInPage() {
             </div>
 
             {/* Security Note */}
-            <div className="mt-6 p-4 bg-gray-800/30 rounded-xl border border-gray-700">
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <i className="fa-solid fa-shield-alt text-cyan-400"></i>
+            <div className="mt-4 p-2.5 bg-gray-800/30 rounded-xl border border-gray-700">
+              <div className="flex items-center space-x-2 text-xs text-gray-400">
+                <i className="fa-solid fa-shield-halved text-cyan-400 text-sm"></i>
                 <span>Your data is securely encrypted and protected</span>
               </div>
             </div>
@@ -253,12 +241,12 @@ export default function SignInPage() {
         </div>
 
         {/* Back to Home */}
-        <div className="text-center mt-6">
+        <div className="text-center mt-3">
           <Link
-            to="/"
-            className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors duration-200"
+            to="/home"
+            className="inline-flex items-center space-x-2 text-gray-400 hover:text-white transition-colors duration-200 text-xs"
           >
-            <i className="fa-solid fa-arrow-left"></i>
+            <i className="fa-solid fa-arrow-left text-sm"></i>
             <span>Back to home</span>
           </Link>
         </div>
