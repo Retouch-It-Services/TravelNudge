@@ -326,7 +326,7 @@ export default function Landing() {
                 },
                 {
                   icon: "fa-brands fa-linkedin",
-                  url: "https://linkedin.com/company/travelnudge",
+                  url: "https://www.linkedin.com/company/retouch-it-services-private-limited/",
                   name: "LinkedIn"
                 }
               ].map((social, index) => (
