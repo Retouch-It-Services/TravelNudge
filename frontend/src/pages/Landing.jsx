@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import SignUpPage from "./SignUpPage";
-import SignInPage from "./SignInPage";
 import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
-  const [showModal, setShowModal] = useState(false);
   const [showOptionsModal, setShowOptionsModal] = useState(false);
-  const [modalType, setModalType] = useState("signup");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,11 +12,10 @@ export default function Landing() {
     const cameFromHome = localStorage.getItem("came_from_home") === "true";
     
     if (cameFromHome) {
-      setModalType("signup");
-      setShowModal(true);
+      navigate("/signup");
       localStorage.removeItem("came_from_home");
     }
-  }, []);
+  }, [navigate]);
   
 
   const features = [
@@ -83,14 +78,12 @@ export default function Landing() {
 
   const handleLogin = () => {
     setShowOptionsModal(false);
-    setModalType("signin");
-    setShowModal(true);
+    navigate("/signin");
   };
 
   const handleSignUp = () => {
     setShowOptionsModal(false);
-    setModalType("signup");
-    setShowModal(true);
+    navigate("/signup");
   };
 
   const handleStayLoggedOut = () => {
@@ -115,7 +108,7 @@ export default function Landing() {
         <div className="w-full px-4 sm:px-6 flex justify-between items-center">
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center">
-              <i className="fa-solid fa-passport text-sm sm:text-base"></i>
+              <i className="fa-solid fa-compass text-sm sm:text-base"></i>
             </div>
             <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               TravelNudge
@@ -124,7 +117,7 @@ export default function Landing() {
           
           <div className="flex items-center space-x-2 sm:space-x-4">
             <button 
-              onClick={() => { setModalType("signin"); setShowModal(true); }}
+              onClick={() => navigate("/signin")}
               className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 transition-all flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base"
             >
               <i className="fa-solid fa-users text-xs sm:text-sm"></i>
@@ -307,7 +300,7 @@ export default function Landing() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3 mb-4 md:mb-0">
               <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center">
-                <i className="fa-solid fa-passport text-white text-xs sm:text-sm"></i>
+                <i className="fa-solid fa-compass text-white text-xs sm:text-sm"></i>
               </div>
               <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                 TravelNudge
@@ -413,41 +406,6 @@ export default function Landing() {
                   By continuing, you agree to our{" "}
                   <a href="#" className="text-cyan-400 hover:text-cyan-300">Terms</a> and{" "}
                   <a href="#" className="text-cyan-400 hover:text-cyan-300">Privacy Policy</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Enhanced Modal for SignIn/SignUp */}
-      {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-            onClick={() => setShowModal(false)}
-          ></div>
-          <div className="relative w-full max-w-md bg-gray-900 border border-gray-700 rounded-2xl shadow-2xl overflow-hidden mx-2">
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-blue-500"></div>
-            <div className="p-4 sm:p-6">
-              <button
-                onClick={() => setShowModal(false)}
-                className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-gray-800"
-              >
-                <i className="fa-solid fa-times text-base sm:text-lg"></i>
-              </button>
-              
-              {modalType === "signup" ? <SignUpPage /> : <SignInPage />}
-              
-              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-700">
-                <p className="text-center text-gray-400 text-sm sm:text-base">
-                  {modalType === "signup" ? "Already have an account?" : "New to TravelNudge?"}{" "}
-                  <button
-                    onClick={() => setModalType(modalType === "signup" ? "signin" : "signup")}
-                    className="text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
-                  >
-                    {modalType === "signup" ? "Sign In" : "Sign Up"}
-                  </button>
                 </p>
               </div>
             </div>
