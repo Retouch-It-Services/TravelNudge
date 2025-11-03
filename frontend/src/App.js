@@ -4,6 +4,7 @@ import SignInPage from "./pages/SignInPage";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import ProfilePage from "./pages/ProfilePage";
+import Support from "./pages/Support";
 function App() {
   return (
     
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/support" element={<Support />} />
       </Routes>
     </BrowserRouter>
   );

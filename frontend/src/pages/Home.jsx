@@ -283,7 +283,7 @@ export default function Home() {
               />
               {!activeChat && (
                 <div className="absolute inset-0 bg-gray-800/50 rounded-xl flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">Select a chat or start a new one</span>
+                  {/* <span className="text-gray-400 text-sm">Select a chat or start a new one</span> */}
                 </div>
               )}
             </div>
@@ -460,10 +460,13 @@ export default function Home() {
                     <i className="fa-solid fa-suitcase w-4"></i>
                     <span>My Routes</span>
                   </button>
-                  <button className="w-full px-4 py-2 text-left hover:bg-gray-700/50 transition-colors flex items-center space-x-3 text-gray-300 text-sm">
-                    <i className="fa-solid fa-gear w-4"></i>
-                    <span>Settings</span>
-                  </button>
+                   <button
+        onClick={() => navigate("/support")} 
+        className="w-full px-4 py-2 text-left hover:bg-gray-700/50 transition-colors flex items-center space-x-3 text-gray-300 text-sm"
+      >
+        <i className="fa-solid fa-question w-4"></i>
+        <span>Support</span>
+      </button>
                 </div>
 
                 <div className="border-t border-gray-700 py-2">
