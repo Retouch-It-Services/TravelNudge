@@ -159,9 +159,9 @@ export default function Home() {
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
-        <div className="text-white text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400 mx-auto mb-4"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-blue-100 to-purple-100">
+        <div className="text-gray-800 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600 mx-auto mb-4"></div>
           <p>Loading...</p>
         </div>
       </div>
@@ -169,19 +169,19 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white flex">
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 via-blue-100 to-purple-100 text-gray-800 flex">
       {/* Left Side - Main Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Chat Header */}
-        <div className="bg-gray-800/50 backdrop-blur-sm border-b border-gray-700 p-4">
+        <div className="bg-white/80 backdrop-blur-sm border-b-2 border-gray-300 p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg flex items-center justify-center">
                 <i className="fa-solid fa-compass text-white text-lg"></i>
               </div>
               <div>
                 <h1 className="text-xl font-bold">TravelNudge AI</h1>
-                <p className="text-cyan-300 text-sm">
+                <p className="text-cyan-700 text-sm">
                   {localStorage.getItem("is_guest") === "true" ? "Guest Mode • Limited Features" : "Online • Ready to help with your travels"}
                 </p>
               </div>
@@ -201,18 +201,18 @@ export default function Home() {
                   className={`max-w-[70%] rounded-2xl p-4 ${
                     msg.type === 'user'
                       ? 'bg-cyan-600 text-white rounded-br-none'
-                      : 'bg-gray-700/80 text-gray-200 rounded-bl-none border border-gray-600'
+                      : 'bg-white/80 text-gray-800 rounded-bl-none border-2 border-gray-300'
                   }`}
                 >
                   <div className="flex items-start space-x-3">
                     {msg.type === 'ai' && (
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center flex-shrink-0">
                         <i className="fa-solid fa-robot text-white text-sm"></i>
                       </div>
                     )}
                     <div className="flex-1">
                       <p className="text-sm leading-relaxed">{msg.message}</p>
-                      <div className={`text-xs mt-2 ${msg.type === 'user' ? 'text-cyan-200' : 'text-gray-400'}`}>
+                      <div className={`text-xs mt-2 ${msg.type === 'user' ? 'text-cyan-200' : 'text-gray-600'}`}>
                         {msg.timestamp}
                       </div>
                     </div>
@@ -228,18 +228,18 @@ export default function Home() {
           ) : (
             // Welcome screen when no chat is selected
             <div className="flex flex-col items-center justify-center h-full text-center space-y-6">
-              <div className="w-20 h-20 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center">
+              <div className="w-20 h-20 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-2xl flex items-center justify-center">
                 <i className="fa-solid fa-compass text-white text-3xl"></i>
               </div>
               <div>
                 <h2 className="text-3xl font-bold mb-4">Welcome to TravelNudge AI</h2>
                 {localStorage.getItem("is_guest") === "true" && (
-                  <div className="bg-yellow-500/20 border border-yellow-500/30 rounded-xl p-4 mb-4">
-                    <p className="text-yellow-300 text-sm">
+                  <div className="bg-yellow-500/20 border-2 border-yellow-500/30 rounded-xl p-4 mb-4">
+                    <p className="text-yellow-700 text-sm">
                       You are in guest mode. Some features may be limited. 
                       <button 
                         onClick={handleSignUpForFullAccess}
-                        className="ml-2 text-cyan-300 hover:text-cyan-200 underline"
+                        className="ml-2 text-cyan-700 hover:text-cyan-800 underline"
                       >
                         Sign up for full access
                       </button>
@@ -254,11 +254,11 @@ export default function Home() {
                   <button
                     key={index}
                     onClick={() => handleQuickPrompt(prompt)}
-                    className="p-4 bg-gray-800/50 border border-gray-700 rounded-xl hover:border-cyan-500/50 hover:bg-gray-800/70 transition-all text-left"
+                    className="p-4 bg-white/80 border-2 border-gray-300 rounded-xl hover:border-cyan-500/50 hover:bg-white transition-all text-left"
                   >
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
-                        <i className="fa-solid fa-bolt text-cyan-400"></i>
+                        <i className="fa-solid fa-bolt text-cyan-600"></i>
                       </div>
                       <span className="text-sm">{prompt}</span>
                     </div>
@@ -270,7 +270,7 @@ export default function Home() {
         </div>
 
         {/* Message Input Area */}
-        <div className="border-t border-gray-700 p-4 bg-gray-800/30">
+        <div className="border-t-2 border-gray-300 p-4 bg-white/60">
           <form onSubmit={handleSendMessage} className="flex space-x-4">
             <div className="flex-1 relative">
               <input
@@ -278,19 +278,19 @@ export default function Home() {
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
                 placeholder="Ask about travel destinations, flights, hotels..."
-                className="w-full px-4 py-3 bg-gray-700/50 border border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent text-white placeholder-gray-400"
+                className="w-full px-4 py-3 bg-white/80 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent text-gray-800 placeholder-gray-500"
                 disabled={!activeChat}
               />
               {!activeChat && (
-                <div className="absolute inset-0 bg-gray-800/50 rounded-xl flex items-center justify-center">
-                  {/* <span className="text-gray-400 text-sm">Select a chat or start a new one</span> */}
+                <div className="absolute inset-0 bg-white/50 rounded-xl flex items-center justify-center">
+                  {/* <span className="text-gray-500 text-sm">Select a chat or start a new one</span> */}
                 </div>
               )}
             </div>
             <button
               type="submit"
               disabled={!messageInput.trim() || !activeChat}
-              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl hover:shadow-lg hover:shadow-cyan-600/40 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
             >
               <i className="fa-solid fa-paper-plane"></i>
               <span className="hidden sm:inline">Send</span>
@@ -303,7 +303,7 @@ export default function Home() {
               <button
                 key={index}
                 onClick={() => handleQuickPrompt(prompt)}
-                className="px-3 py-2 text-xs bg-gray-700/50 hover:bg-gray-600/50 text-gray-300 rounded-lg transition-colors border border-gray-600"
+                className="px-3 py-2 text-xs bg-white/80 hover:bg-white text-gray-700 rounded-lg transition-colors border-2 border-gray-300"
               >
                 {prompt}
               </button>
@@ -313,12 +313,12 @@ export default function Home() {
       </div>
 
       {/* Right Sidebar - Chat History */}
-      <div className="w-80 bg-gray-800/30 backdrop-blur-sm border-l border-gray-700 flex flex-col">
+      <div className="w-80 bg-white/60 backdrop-blur-sm border-l-2 border-gray-300 flex flex-col">
         {/* Sidebar Header */}
-        <div className="p-4 border-b border-gray-700">
+        <div className="p-4 border-b-2 border-gray-300">
           <button
             onClick={handleNewChat}
-            className="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-500/25 transition-all flex items-center justify-center space-x-2"
+            className="w-full py-3 px-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-cyan-600/40 transition-all flex items-center justify-center space-x-2"
           >
             <i className="fa-solid fa-plus"></i>
             <span>New Chat</span>
@@ -326,17 +326,17 @@ export default function Home() {
         </div>
 
         {/* Search Bar */}
-        <div className="p-4 border-b border-gray-700">
+        <div className="p-4 border-b-2 border-gray-300">
           <div className="relative">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <i className="fa-solid fa-search text-gray-400"></i>
+              <i className="fa-solid fa-search text-gray-500"></i>
             </div>
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search chats..."
-              className="w-full pl-10 pr-4 py-2 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent text-white placeholder-gray-400"
+              className="w-full pl-10 pr-4 py-2 bg-white/80 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent text-gray-800 placeholder-gray-500"
             />
           </div>
         </div>
@@ -345,7 +345,7 @@ export default function Home() {
         <div className="flex-1 overflow-y-auto">
           {/* Today's Chats */}
           <div className="p-4">
-            <h3 className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">Today</h3>
+            <h3 className="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wide">Today</h3>
             <div className="space-y-2">
               {chatCategories.today.map((chat) => (
                 <div
@@ -353,22 +353,22 @@ export default function Home() {
                   onClick={() => setActiveChat(chat.id)}
                   className={`p-3 rounded-lg cursor-pointer transition-all ${
                     activeChat === chat.id
-                      ? 'bg-cyan-500/20 border border-cyan-500/30'
-                      : 'bg-gray-700/30 hover:bg-gray-700/50 border border-transparent'
+                      ? 'bg-cyan-500/20 border-2 border-cyan-500/30'
+                      : 'bg-white/80 hover:bg-white border-2 border-transparent'
                   }`}
                 >
                   <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-medium text-white text-sm truncate">{chat.title}</h4>
+                    <h4 className="font-medium text-gray-800 text-sm truncate">{chat.title}</h4>
                     {chat.unread > 0 && (
-                      <span className="bg-cyan-500 text-white text-xs px-2 py-1 rounded-full min-w-5 h-5 flex items-center justify-center">
+                      <span className="bg-cyan-600 text-white text-xs px-2 py-1 rounded-full min-w-5 h-5 flex items-center justify-center">
                         {chat.unread}
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-400 text-xs truncate mb-1">{chat.lastMessage}</p>
+                  <p className="text-gray-600 text-xs truncate mb-1">{chat.lastMessage}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-cyan-400 text-xs">{chat.timestamp}</span>
-                    <span className="text-xs px-2 py-1 bg-gray-600 rounded-full capitalize">
+                    <span className="text-cyan-700 text-xs">{chat.timestamp}</span>
+                    <span className="text-xs px-2 py-1 bg-gray-200 rounded-full capitalize">
                       {chat.type}
                     </span>
                   </div>
@@ -378,8 +378,8 @@ export default function Home() {
           </div>
 
           {/* Recent Chats */}
-          <div className="p-4 border-t border-gray-700">
-            <h3 className="text-sm font-semibold text-gray-400 mb-3 uppercase tracking-wide">Recent</h3>
+          <div className="p-4 border-t-2 border-gray-300">
+            <h3 className="text-sm font-semibold text-gray-600 mb-3 uppercase tracking-wide">Recent</h3>
             <div className="space-y-2">
               {chatCategories.recent.map((chat) => (
                 <div
@@ -387,22 +387,22 @@ export default function Home() {
                   onClick={() => setActiveChat(chat.id)}
                   className={`p-3 rounded-lg cursor-pointer transition-all ${
                     activeChat === chat.id
-                      ? 'bg-cyan-500/20 border border-cyan-500/30'
-                      : 'bg-gray-700/30 hover:bg-gray-700/50 border border-transparent'
+                      ? 'bg-cyan-500/20 border-2 border-cyan-500/30'
+                      : 'bg-white/80 hover:bg-white border-2 border-transparent'
                   }`}
                 >
                   <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-medium text-white text-sm truncate">{chat.title}</h4>
+                    <h4 className="font-medium text-gray-800 text-sm truncate">{chat.title}</h4>
                     {chat.unread > 0 && (
-                      <span className="bg-cyan-500 text-white text-xs px-2 py-1 rounded-full min-w-5 h-5 flex items-center justify-center">
+                      <span className="bg-cyan-600 text-white text-xs px-2 py-1 rounded-full min-w-5 h-5 flex items-center justify-center">
                         {chat.unread}
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-400 text-xs truncate mb-1">{chat.lastMessage}</p>
+                  <p className="text-gray-600 text-xs truncate mb-1">{chat.lastMessage}</p>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-500 text-xs">{chat.timestamp}</span>
-                    <span className="text-xs px-2 py-1 bg-gray-600 rounded-full capitalize">
+                    <span className="text-xs px-2 py-1 bg-gray-200 rounded-full capitalize">
                       {chat.type}
                     </span>
                   </div>
@@ -413,35 +413,35 @@ export default function Home() {
         </div>
 
         {/* Profile Section at Bottom */}
-        <div className="border-t border-gray-700 p-4">
+        <div className="border-t-2 border-gray-300 p-4">
           <div className="relative profile-menu-container">
             <button
               onClick={() => setShowProfileMenu(!showProfileMenu)}
-              className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-700/50 transition-all border border-gray-600 w-full"
+              className="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/80 transition-all border-2 border-gray-300 w-full"
             >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center font-semibold text-white">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center font-semibold text-white">
                 {getUserInitials()}
               </div>
               <div className="flex-1 text-left">
-                <div className="font-medium text-white text-sm">{user?.full_name || "User"}</div>
-                <div className="text-gray-400 text-xs">
+                <div className="font-medium text-gray-800 text-sm">{user?.full_name || "User"}</div>
+                <div className="text-gray-600 text-xs">
                   {localStorage.getItem("is_guest") === "true" ? "Guest User" : user?.email || ""}
                 </div>
               </div>
-              <i className={`fa-solid fa-chevron-down text-sm transition-transform text-gray-400 ${showProfileMenu ? 'rotate-180' : ''}`}></i>
+              <i className={`fa-solid fa-chevron-down text-sm transition-transform text-gray-600 ${showProfileMenu ? 'rotate-180' : ''}`}></i>
             </button>
 
             {/* Profile Dropdown Menu */}
             {showProfileMenu && (
-              <div className="absolute bottom-full left-0 right-0 mb-2 bg-gray-800 rounded-xl border border-gray-700 shadow-2xl overflow-hidden z-50">
-                <div className="p-4 border-b border-gray-700">
+              <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-xl border-2 border-gray-300 shadow-2xl overflow-hidden z-50">
+                <div className="p-4 border-b-2 border-gray-300">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center font-semibold text-lg text-white">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center font-semibold text-lg text-white">
                       {getUserInitials()}
                     </div>
                     <div>
-                      <div className="font-semibold text-white text-sm">{user?.full_name || "User"}</div>
-                      <div className="text-gray-400 text-xs">
+                      <div className="font-semibold text-gray-800 text-sm">{user?.full_name || "User"}</div>
+                      <div className="text-gray-600 text-xs">
                         {localStorage.getItem("is_guest") === "true" ? "Guest Mode" : user?.email || "No email"}
                       </div>
                     </div>
@@ -451,28 +451,28 @@ export default function Home() {
                 <div className="py-2">
                   <button 
                     onClick={handleMyProfile}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-700/50 transition-colors flex items-center space-x-3 text-gray-300 text-sm"
+                    className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center space-x-3 text-gray-700 text-sm"
                   >
                     <i className="fa-solid fa-user w-4"></i>
                     <span>My Profile</span>
                   </button>
-                  <button className="w-full px-4 py-2 text-left hover:bg-gray-700/50 transition-colors flex items-center space-x-3 text-gray-300 text-sm">
+                  <button className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center space-x-3 text-gray-700 text-sm">
                     <i className="fa-solid fa-suitcase w-4"></i>
                     <span>My Routes</span>
                   </button>
                    <button
         onClick={() => navigate("/support")} 
-        className="w-full px-4 py-2 text-left hover:bg-gray-700/50 transition-colors flex items-center space-x-3 text-gray-300 text-sm"
+        className="w-full px-4 py-2 text-left hover:bg-gray-100 transition-colors flex items-center space-x-3 text-gray-700 text-sm"
       >
         <i className="fa-solid fa-question w-4"></i>
         <span>Support</span>
       </button>
                 </div>
 
-                <div className="border-t border-gray-700 py-2">
+                <div className="border-t-2 border-gray-300 py-2">
                   <button 
                     onClick={handleLogout}
-                    className="w-full px-4 py-2 text-left hover:bg-red-500/10 text-red-400 transition-colors flex items-center space-x-3 text-sm"
+                    className="w-full px-4 py-2 text-left hover:bg-red-500/10 text-red-600 transition-colors flex items-center space-x-3 text-sm"
                   >
                     <i className="fa-solid fa-right-from-bracket w-4"></i>
                     <span>{localStorage.getItem("is_guest") === "true" ? "Exit Guest Mode" : "Sign Out"}</span>
