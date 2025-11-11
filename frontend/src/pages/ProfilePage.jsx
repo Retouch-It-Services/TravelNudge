@@ -5,6 +5,9 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -92,6 +95,37 @@ export default function ProfilePage() {
     navigate("/");
   };
 
+  const handleDeleteAccount = () => {
+    setShowDeleteConfirm(true);
+  };
+
+  const confirmDeleteAccount = () => {
+    if (deleteConfirmText.toLowerCase() !== "delete my account") {
+      alert("Please type 'delete my account' exactly as shown to confirm.");
+      return;
+    }
+
+    setIsDeleting(true);
+    
+    // Simulate API call delay
+    setTimeout(() => {
+      // Clear all user data from localStorage
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("token");
+      localStorage.removeItem("user_data");
+      localStorage.removeItem("user_profile");
+      
+      setIsDeleting(false);
+      alert("Your account has been permanently deleted.");
+      navigate("/");
+    }, 1500);
+  };
+
+  const cancelDeleteAccount = () => {
+    setShowDeleteConfirm(false);
+    setDeleteConfirmText("");
+  };
+
   const getTravelerType = () => {
     if (!formData.date_of_birth) return "Not specified";
     const dob = new Date(formData.date_of_birth);
@@ -124,8 +158,63 @@ export default function ProfilePage() {
         </div>
       </div>
 
+      {/* Delete Account Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl border-2 border-red-300 max-w-md w-full p-6 animate-scale-in">
+            <div className="text-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-r from-red-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xl mx-auto mb-4">
+                <i className="fa-solid fa-exclamation"></i>
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">Delete Account</h3>
+              <p className="text-gray-600 mb-4">
+                This action cannot be undone. This will permanently delete your account and remove all your data from our system.
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                Please type <span className="font-mono text-red-500">"delete my account"</span> to confirm.
+              </p>
+            </div>
+
+            <input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              placeholder="delete my account"
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent text-gray-800 placeholder-gray-500 mb-4"
+            />
+
+            <div className="flex space-x-3">
+              <button
+                onClick={cancelDeleteAccount}
+                className="flex-1 px-4 py-3 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition-colors font-semibold"
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmDeleteAccount}
+                disabled={isDeleting || deleteConfirmText.toLowerCase() !== "delete my account"}
+                className="flex-1 px-4 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg hover:shadow-lg hover:shadow-red-500/25 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+              >
+                {isDeleting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Deleting...</span>
+                  </>
+                ) : (
+                  <>
+                    <i className="fa-solid fa-trash"></i>
+                    <span>Delete Account</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
-      <nav className="relative z-50 bg-white/90 backdrop-blur-lg border-b-2 border-gray-300">
+      <nav className="relative z-40 bg-white/90 backdrop-blur-lg border-b-2 border-gray-300">
         <div className="container mx-auto px-6">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
@@ -278,9 +367,6 @@ export default function ProfilePage() {
 
             {/* Right Column - Traveler Details & Actions */}
             <div className="space-y-6">
-              
-            
-
               {/* Account Actions */}
               <div className="bg-white/80 backdrop-blur-sm rounded-2xl border-2 border-gray-300 p-6">
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Account Actions</h2>
@@ -305,6 +391,15 @@ export default function ProfilePage() {
                     <i className="fa-solid fa-question-circle text-cyan-600"></i>
                     <span>Help & Support</span>
                   </button>
+
+                  {/* Delete Account Button */}
+                  <button 
+                    onClick={handleDeleteAccount}
+                    className="w-full px-4 py-3 text-left bg-white/80 hover:bg-red-50 rounded-lg transition-colors flex items-center space-x-3 text-red-600 hover:text-red-700 border-2 border-red-200 hover:border-red-300"
+                  >
+                    <i className="fa-solid fa-trash"></i>
+                    <span>Delete Account</span>
+                  </button>
                 </div>
               </div>
 
@@ -316,8 +411,6 @@ export default function ProfilePage() {
                 <i className="fa-solid fa-right-from-bracket"></i>
                 <span>Sign Out</span>
               </button>
-
-             
             </div>
           </div>
         </div>

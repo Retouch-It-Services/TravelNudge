@@ -152,7 +152,7 @@ export default function Landing() {
           </h1>
           
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
-            Your intelligent travel companion that anticipates your needs and enhances every journey with real-time insights and personalized recommendations.
+             Stop the search headache.TravelNudge finds all your transport deals in one spot.
           </p>
 
           {/* Travel Categories */}
@@ -178,7 +178,7 @@ export default function Landing() {
                   </div>
                   <input
                     type="text"
-                    placeholder="Ask me anything about your travel plans..."
+                    placeholder="Looking for travel offers? Type here hi!"
                     className="flex-1 px-2 sm:px-4 py-3 sm:py-4 bg-transparent text-gray-800 placeholder-gray-500 focus:outline-none text-sm sm:text-lg w-full"
                     onKeyPress={(e) => {
                       if (e.key === 'Enter') {
@@ -278,27 +278,81 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative z-10 py-12 sm:py-20 w-full">
-        <div className="w-full px-4 sm:px-6 text-center">
-          <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 border-2 border-gray-300 shadow-2xl">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-800">
-              Ready to Transform Your Travel Experience?
-            </h2>
-            <p className="text-base sm:text-xl text-gray-600 mb-6 sm:mb-8 px-2">
-              Join thousands of smart travelers who trust TravelNudge for their journeys.
+      {/* About Us Section */}
+      {/* About Us Section - Replaced CTA Section */}
+<section className="relative z-10 py-12 sm:py-20 w-full">
+  <div className="w-full px-4 sm:px-6">
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-8 sm:mb-16">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-gray-800">About TravelNudge</h2>
+        <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
+          TravelNudge combines AI and modern web technologies to simplify and personalize the travel planning experience.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
+        <div className="space-y-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-6 border-2 border-gray-300 shadow-xl">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Mission</h3>
+            <p className="text-gray-600 mb-4">
+              At TravelNudge, we believe that travel planning should be effortless, intelligent, and personalized. 
+              Our mission is to eliminate the stress of searching through countless websites and apps to find the best travel deals.
             </p>
-            <button 
-              onClick={handleGetStarted}
-              className="px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg bg-gradient-to-r from-cyan-600 to-blue-600 rounded-xl font-semibold hover:shadow-2xl hover:shadow-cyan-600/40 transition-all transform hover:scale-105 flex items-center space-x-2 mx-auto text-white"
-            >
-              <span>Start Your Journey Free</span>
-              <i className="fa-solid fa-chevron-right"></i>
-            </button>
-            <p className="text-gray-500 mt-3 sm:mt-4 text-xs sm:text-sm font-medium">Features Limited . SignUp for free access</p>
+            <p className="text-gray-600">
+              We leverage cutting-edge AI technology to provide smart recommendations that save you time, money, and hassle.
+            </p>
+          </div>
+
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-6 border-2 border-gray-300 shadow-xl">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Story</h3>
+            <p className="text-gray-600 mb-4">
+              Founded by a team of passionate travelers and tech enthusiasts, TravelNudge was born from our own 
+              frustrations with the complexity of travel planning. We noticed that finding the right transportation 
+              options required checking multiple platforms, comparing prices, and spending hours on research.
+            </p>
+            <p className="text-gray-600">
+              We created TravelNudge to solve this problem - one intelligent platform that does the hard work for you, 
+              so you can focus on enjoying your journey.
+            </p>
           </div>
         </div>
-      </section>
+
+        <div className="space-y-6">
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border-2 border-gray-300 shadow-xl">
+            <h3 className="text-xl sm:text-2xl font-bold mb-9 text-cyan-700">What We Do</h3>
+            <p className="text-gray-600">
+              TravelNudge aggregates the best travel deals across flights, buses, cabs, and trains, providing you with 
+              comprehensive options in one convenient platform. Our AI analyzes your preferences to deliver personalized 
+              recommendations that match your travel style and budget.
+            </p>
+          </div>
+
+          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-10 border-2 border-gray-300 shadow-xl">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Values</h3>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-3 bg-cyan-50 rounded-lg border border-cyan-200">
+                <i className="fa-solid fa-lightbulb text-cyan-600 text-xl mb-2"></i>
+                <p className="text-sm font-semibold text-cyan-700">Innovation</p>
+              </div>
+              <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
+                <i className="fa-solid fa-heart text-blue-600 text-xl mb-2"></i>
+                <p className="text-sm font-semibold text-blue-700">User-First</p>
+              </div>
+              <div className="text-center p-3 bg-purple-50 rounded-lg border border-purple-200">
+                <i className="fa-solid fa-shield-alt text-purple-600 text-xl mb-2"></i>
+                <p className="text-sm font-semibold text-purple-700">Trust</p>
+              </div>
+              <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
+                <i className="fa-solid fa-globe text-green-600 text-xl mb-2"></i>
+                <p className="text-sm font-semibold text-green-700">Global</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="relative z-10 py-8 sm:py-12 bg-white/90 backdrop-blur-sm border-t-2 border-gray-300 w-full">

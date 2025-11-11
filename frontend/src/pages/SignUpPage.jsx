@@ -15,6 +15,7 @@ export default function SignUpPage() {
 
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // 🧮 Password strength checker
   const calculatePasswordStrength = (password) => {
@@ -91,7 +92,9 @@ export default function SignUpPage() {
         body: JSON.stringify({
           full_name: formData.fullName,
           email: formData.email,
+          phone: null, // optional (or add input field later)
           password: formData.password,
+          confirm_password: formData.confirmPassword, // ✅ ADD THIS LINE
         }),
       });
 
@@ -100,8 +103,14 @@ export default function SignUpPage() {
         throw new Error(error.detail || "Signup failed");
       }
 
-      alert("✅ Account created successfully! Please sign in.");
-      navigate("/signin");
+      // Show custom success message instead of browser alert
+      setShowSuccess(true);
+      
+      // Navigate after 1.5 seconds
+      setTimeout(() => {
+        navigate("/signin");
+      }, 1500);
+
     } catch (error) {
       console.error("Signup error:", error);
       alert(error.message);
@@ -112,6 +121,17 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-blue-100 to-purple-100 relative overflow-hidden overflow-y-auto py-6 px-4">
+      {/* Simple Success Message Modal - Positioned Middle Upper */}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 p-4">
+          <div className="flex justify-center pt-20">
+            <div className="bg-white rounded-2xl shadow-2xl p-6 text-center max-w-sm">
+              <h3 className="text-xl font-bold text-gray-800">Account created successfully! Please sign in</h3>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Background */}
       <div className="fixed inset-0 overflow-hidden">
         <div className="absolute -inset-10 opacity-40">

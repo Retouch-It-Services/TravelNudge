@@ -11,6 +11,7 @@ export default function SignInPage() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -60,8 +61,14 @@ export default function SignInPage() {
       
       localStorage.setItem("user_data", JSON.stringify(userData));
 
-      alert("✅ Login successful!");
-      navigate("/home");
+      // Show custom success message instead of browser alert
+      setShowSuccess(true);
+      
+      // Navigate after 1.5 seconds
+      setTimeout(() => {
+        navigate("/home");
+      }, 1500);
+
     } catch (error) {
       console.error("Login error:", error);
       alert(error.message);
@@ -72,6 +79,17 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-blue-100 to-purple-100 relative overflow-hidden overflow-y-auto py-8 px-4">
+      {/* Simple Success Message Modal - Positioned Middle Upper */}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 p-4">
+          <div className="flex justify-center pt-20"> {/* Changed from items-center to pt-20 for upper positioning */}
+            <div className="bg-white rounded-2xl shadow-2xl p-6 text-center max-w-sm">
+              <h3 className="text-xl font-bold text-gray-800">You're successfully signed in</h3>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -inset-10 opacity-40">
