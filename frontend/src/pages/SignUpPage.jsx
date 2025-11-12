@@ -1,5 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase"; // ✅ your firebase.js file
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -69,7 +71,7 @@ export default function SignUpPage() {
     }
   };
 
-  // 🧩 Submit Signup Form (Connect to FastAPI)
+  // 🧩 Combined Signup (Firebase + FastAPI)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -86,15 +88,20 @@ export default function SignUpPage() {
     setLoading(true);
 
     try {
+      // ✅ 1. Create user in Firebase Auth
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      console.log("Firebase signup successful");
+
+      // ✅ 2. Register user in your FastAPI backend
       const response = await fetch("http://127.0.0.1:8000/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           full_name: formData.fullName,
           email: formData.email,
-          phone: null, // optional (or add input field later)
+          phone: null,
           password: formData.password,
-          confirm_password: formData.confirmPassword, // ✅ ADD THIS LINE
+          confirm_password: formData.confirmPassword,
         }),
       });
 
@@ -103,10 +110,9 @@ export default function SignUpPage() {
         throw new Error(error.detail || "Signup failed");
       }
 
-      // Show custom success message instead of browser alert
+      console.log("Backend signup successful");
       setShowSuccess(true);
-      
-      // Navigate after 1.5 seconds
+
       setTimeout(() => {
         navigate("/signin");
       }, 1500);
@@ -121,12 +127,14 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-gray-100 via-blue-100 to-purple-100 relative overflow-hidden overflow-y-auto py-6 px-4">
-      {/* Simple Success Message Modal - Positioned Middle Upper */}
+      {/* ✅ Success Message Modal */}
       {showSuccess && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 p-4">
           <div className="flex justify-center pt-20">
             <div className="bg-white rounded-2xl shadow-2xl p-6 text-center max-w-sm">
-              <h3 className="text-xl font-bold text-gray-800">Account created successfully! Please sign in</h3>
+              <h3 className="text-xl font-bold text-gray-800">
+                Account created successfully! Please sign in
+              </h3>
             </div>
           </div>
         </div>
