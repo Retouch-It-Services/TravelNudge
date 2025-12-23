@@ -10,13 +10,13 @@ export default function Landing() {
 
   useEffect(() => {
     const cameFromHome = localStorage.getItem("came_from_home") === "true";
-    
+
     if (cameFromHome) {
       navigate("/signup");
       localStorage.removeItem("came_from_home");
     }
   }, [navigate]);
-  
+
 
   const features = [
     {
@@ -107,23 +107,17 @@ export default function Landing() {
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-lg py-2 shadow-md' : 'py-4'} w-full`}>
         <div className="w-full px-4 sm:px-6 flex justify-between items-center">
           <div className="flex items-center space-x-2 sm:space-x-3">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-              <i className="fa-solid fa-compass text-white text-sm sm:text-base"></i>
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center shadow-lg overflow-hidden">
+              <img src="/TravelNudge Logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
             </div>
             <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-cyan-700 to-blue-700 bg-clip-text text-transparent">
               TravelNudge
             </span>
           </div>
-          
+
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <button 
-              onClick={handleLogin}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-100 transition-all flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base font-medium"
-            >
-              <i className="fa-solid fa-users text-xs sm:text-sm"></i>
-              <span className="hidden sm:inline">Sign In</span>
-            </button>
-            <button 
+        
+            <button
               onClick={handleGetStarted}
               className="px-4 py-1.5 sm:px-6 sm:py-2 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold hover:shadow-xl hover:shadow-cyan-600/40 transition-all flex items-center space-x-1 sm:space-x-2 text-sm sm:text-base"
             >
@@ -150,9 +144,9 @@ export default function Landing() {
               {" "}NudgeAI
             </span>
           </h1>
-          
+
           <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
-             Stop the search headache.TravelNudge finds all your transport deals in one spot.
+            Stop the search headache.TravelNudge finds all your transport deals in one spot.
           </p>
 
           {/* Travel Categories */}
@@ -229,13 +223,12 @@ export default function Landing() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto">
             {features.map((feature, index) => (
-              <div 
+              <div
                 key={index}
-                className={`p-4 sm:p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-500 cursor-pointer ${
-                  activeFeature === index 
-                    ? 'bg-white border-cyan-500 shadow-2xl shadow-cyan-600/30 transform -translate-y-1 sm:-translate-y-2' 
-                    : 'bg-white/80 border-gray-300 hover:border-cyan-400 hover:bg-white hover:shadow-xl'
-                }`}
+                className={`p-4 sm:p-6 rounded-2xl border-2 backdrop-blur-sm transition-all duration-500 cursor-pointer ${activeFeature === index
+                  ? 'bg-white border-cyan-500 shadow-2xl shadow-cyan-600/30 transform -translate-y-1 sm:-translate-y-2'
+                  : 'bg-white/80 border-gray-300 hover:border-cyan-400 hover:bg-white hover:shadow-xl'
+                  }`}
                 onMouseEnter={() => setActiveFeature(index)}
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 flex items-center justify-center mb-3 sm:mb-4 shadow-lg">
@@ -258,7 +251,7 @@ export default function Landing() {
               Three simple steps to transform your travel experience
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
             {[
               { step: "01", title: "Describe Your Trip", description: "Tell us about your travel preferences and destination", icon: "fa-solid fa-compass" },
@@ -280,93 +273,93 @@ export default function Landing() {
 
       {/* About Us Section */}
       {/* About Us Section - Replaced CTA Section */}
-<section className="relative z-10 py-12 sm:py-20 w-full">
-  <div className="w-full px-4 sm:px-6">
-    <div className="max-w-6xl mx-auto">
-      <div className="text-center mb-8 sm:mb-16">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-gray-800">About TravelNudge</h2>
-        <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
-          TravelNudge combines AI and modern web technologies to simplify and personalize the travel planning experience.
-        </p>
-      </div>
+      <section className="relative z-10 py-12 sm:py-20 w-full">
+        <div className="w-full px-4 sm:px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8 sm:mb-16">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 text-gray-800">About TravelNudge</h2>
+              <p className="text-base sm:text-xl text-gray-600 max-w-3xl mx-auto px-2">
+                TravelNudge combines AI and modern web technologies to simplify and personalize the travel planning experience.
+              </p>
+            </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
-        <div className="space-y-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-6 border-2 border-gray-300 shadow-xl">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Mission</h3>
-            <p className="text-gray-600 mb-4">
-              At TravelNudge, we believe that travel planning should be effortless, intelligent, and personalized. 
-              Our mission is to eliminate the stress of searching through countless websites and apps to find the best travel deals.
-            </p>
-            <p className="text-gray-600">
-              We leverage cutting-edge AI technology to provide smart recommendations that save you time, money, and hassle.
-            </p>
-          </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
+              <div className="space-y-6">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-6 border-2 border-gray-300 shadow-xl">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Mission</h3>
+                  <p className="text-gray-600 mb-4">
+                    At TravelNudge, we believe that travel planning should be effortless, intelligent, and personalized.
+                    Our mission is to eliminate the stress of searching through countless websites and apps to find the best travel deals.
+                  </p>
+                  <p className="text-gray-600">
+                    We leverage cutting-edge AI technology to provide smart recommendations that save you time, money, and hassle.
+                  </p>
+                </div>
 
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-6 border-2 border-gray-300 shadow-xl">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Story</h3>
-            <p className="text-gray-600 mb-4">
-              Founded by a team of passionate travelers and tech enthusiasts, TravelNudge was born from our own 
-              frustrations with the complexity of travel planning. We noticed that finding the right transportation 
-              options required checking multiple platforms, comparing prices, and spending hours on research.
-            </p>
-            <p className="text-gray-600">
-              We created TravelNudge to solve this problem - one intelligent platform that does the hard work for you, 
-              so you can focus on enjoying your journey.
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-6">
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border-2 border-gray-300 shadow-xl">
-            <h3 className="text-xl sm:text-2xl font-bold mb-9 text-cyan-700">What We Do</h3>
-            <p className="text-gray-600">
-              TravelNudge aggregates the best travel deals across flights, buses, cabs, and trains, providing you with 
-              comprehensive options in one convenient platform. Our AI analyzes your preferences to deliver personalized 
-              recommendations that match your travel style and budget.
-            </p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-10 border-2 border-gray-300 shadow-xl">
-            <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Values</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-3 bg-cyan-50 rounded-lg border border-cyan-200">
-                <i className="fa-solid fa-lightbulb text-cyan-600 text-xl mb-2"></i>
-                <p className="text-sm font-semibold text-cyan-700">Innovation</p>
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-6 border-2 border-gray-300 shadow-xl">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Story</h3>
+                  <p className="text-gray-600 mb-4">
+                    Founded by a team of passionate travelers and tech enthusiasts, TravelNudge was born from our own
+                    frustrations with the complexity of travel planning. We noticed that finding the right transportation
+                    options required checking multiple platforms, comparing prices, and spending hours on research.
+                  </p>
+                  <p className="text-gray-600">
+                    We created TravelNudge to solve this problem - one intelligent platform that does the hard work for you,
+                    so you can focus on enjoying your journey.
+                  </p>
+                </div>
               </div>
-              <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
-                <i className="fa-solid fa-heart text-blue-600 text-xl mb-2"></i>
-                <p className="text-sm font-semibold text-blue-700">User-First</p>
-              </div>
-              <div className="text-center p-3 bg-purple-50 rounded-lg border border-purple-200">
-                <i className="fa-solid fa-shield-alt text-purple-600 text-xl mb-2"></i>
-                <p className="text-sm font-semibold text-purple-700">Trust</p>
-              </div>
-              <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
-                <i className="fa-solid fa-globe text-green-600 text-xl mb-2"></i>
-                <p className="text-sm font-semibold text-green-700">Global</p>
+
+              <div className="space-y-6">
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border-2 border-gray-300 shadow-xl">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-9 text-cyan-700">What We Do</h3>
+                  <p className="text-gray-600">
+                    TravelNudge aggregates the best travel deals across flights, buses, cabs, and trains, providing you with
+                    comprehensive options in one convenient platform. Our AI analyzes your preferences to deliver personalized
+                    recommendations that match your travel style and budget.
+                  </p>
+                </div>
+
+                <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-10 border-2 border-gray-300 shadow-xl">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-4 text-cyan-700">Our Values</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-3 bg-cyan-50 rounded-lg border border-cyan-200">
+                      <i className="fa-solid fa-lightbulb text-cyan-600 text-xl mb-2"></i>
+                      <p className="text-sm font-semibold text-cyan-700">Innovation</p>
+                    </div>
+                    <div className="text-center p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <i className="fa-solid fa-heart text-blue-600 text-xl mb-2"></i>
+                      <p className="text-sm font-semibold text-blue-700">User-First</p>
+                    </div>
+                    <div className="text-center p-3 bg-purple-50 rounded-lg border border-purple-200">
+                      <i className="fa-solid fa-shield-alt text-purple-600 text-xl mb-2"></i>
+                      <p className="text-sm font-semibold text-purple-700">Trust</p>
+                    </div>
+                    <div className="text-center p-3 bg-green-50 rounded-lg border border-green-200">
+                      <i className="fa-solid fa-globe text-green-600 text-xl mb-2"></i>
+                      <p className="text-sm font-semibold text-green-700">Global</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Footer */}
       <footer className="relative z-10 py-8 sm:py-12 bg-white/90 backdrop-blur-sm border-t-2 border-gray-300 w-full">
         <div className="w-full px-4 sm:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 sm:space-x-3 mb-4 md:mb-0">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg flex items-center justify-center shadow-lg">
-                <i className="fa-solid fa-compass text-white text-xs sm:text-sm"></i>
+              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-lg flex items-center justify-center shadow-lg overflow-hidden">
+                <img src="/TravelNudge Logo.jpeg" alt="Logo" className="w-full h-full object-cover" />
               </div>
               <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-cyan-700 to-blue-700 bg-clip-text text-transparent">
                 TravelNudge
               </span>
             </div>
-            
+
             <div className="flex space-x-4 sm:space-x-6 mb-4 md:mb-0">
               {[
                 {
@@ -376,7 +369,7 @@ export default function Landing() {
                 },
                 {
                   icon: "fa-brands fa-facebook",
-                  url: "https://www.facebook.com/share/1CWxD9nySu/", 
+                  url: "https://www.facebook.com/share/1CWxD9nySu/",
                   name: "Facebook"
                 },
                 {
@@ -390,10 +383,10 @@ export default function Landing() {
                   name: "LinkedIn"
                 }
               ].map((social, index) => (
-                <a 
+                <a
                   key={index}
                   href={social.url}
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-600 hover:text-cyan-700 transition-colors"
                   aria-label={`Visit our ${social.name} page`}
@@ -402,7 +395,7 @@ export default function Landing() {
                 </a>
               ))}
             </div>
-            
+
             <div className="text-gray-600 text-xs sm:text-sm font-medium">
               © 2025 TravelNudge. All rights reserved.
             </div>
@@ -413,7 +406,7 @@ export default function Landing() {
       {/* Options Modal */}
       {showOptionsModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div 
+          <div
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setShowOptionsModal(false)}
           ></div>
@@ -426,10 +419,10 @@ export default function Landing() {
               >
                 <i className="fa-solid fa-times text-base sm:text-lg"></i>
               </button>
-              
+
               <div className="text-center mb-6 sm:mb-8">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
-                  <i className="fa-solid fa-compass text-white text-xl sm:text-2xl"></i>
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg overflow-hidden p-1">
+                  <img src="/TravelNudge Logo.jpeg" alt="TravelNudge Logo" className="w-full h-full object-cover rounded-full" />
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1 sm:mb-2">Welcome to TravelNudge</h2>
                 <p className="text-gray-600 text-sm sm:text-base">Choose how you'd like to continue</p>
@@ -443,7 +436,7 @@ export default function Landing() {
                   <i className="fa-solid fa-right-to-bracket"></i>
                   <span>Sign In to Your Account</span>
                 </button>
-        
+
                 <button
                   onClick={handleSignUp}
                   className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-purple-600/40 transition-all flex items-center justify-center space-x-2 text-sm sm:text-base"
@@ -464,8 +457,8 @@ export default function Landing() {
               <div className="mt-4 sm:mt-6 text-center">
                 <p className="text-gray-600 text-xs sm:text-sm">
                   By continuing, you agree to our{" "}
-                  <a href="#" className="text-cyan-700 hover:text-cyan-800 font-medium">Terms</a> and{" "}
-                  <a href="#" className="text-cyan-700 hover:text-cyan-800 font-medium">Privacy Policy</a>
+                  <a href="/" className="text-cyan-700 hover:text-cyan-800 font-medium">Terms</a> and{" "}
+                  <a href="/" className="text-cyan-700 hover:text-cyan-800 font-medium">Privacy Policy</a>
                 </p>
               </div>
             </div>

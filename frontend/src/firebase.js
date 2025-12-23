@@ -5,13 +5,13 @@ import { getAuth } from "firebase/auth";  // ✅ Add this line
 
 // ✅ Your Firebase project configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCMUX6jO6ubFq8K0rJ6Lbx3YlLQVfO89N4",
-  authDomain: "travelnudge-81601.firebaseapp.com",
-  projectId: "travelnudge-81601",
-  storageBucket: "travelnudge-81601.firebasestorage.app",
-  messagingSenderId: "328816559237",
-  appId: "1:328816559237:web:a8fedef35c8feeef3a15ec",
-  measurementId: "G-LY6WRZP9YQ",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // ✅ Initialize Firebase

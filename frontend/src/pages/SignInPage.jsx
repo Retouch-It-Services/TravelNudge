@@ -1,4 +1,3 @@
-// src/pages/SignInPage.jsx
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -18,14 +17,27 @@ export default function SignInPage() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
 
-  // ✅ Email/Password Sign In
+  // ✅ Email/Password Sign In (ONLY CHANGE HERE)
   const handleEmailSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful!");
-      navigate("/Home");
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+
+      const userData = {
+        full_name: user.displayName || user.email || "",
+        email: user.email || "",
+        uid: user.uid,
+      };
+
+      localStorage.setItem("access_token", token);
+      localStorage.setItem("user_data", JSON.stringify(userData));
+      localStorage.setItem("is_guest", "false");
+
+      navigate("/home", { replace: true });
+
     } catch (error) {
       alert(error.message);
     } finally {
@@ -33,19 +45,34 @@ export default function SignInPage() {
     }
   };
 
-  // ✅ Google Sign In
+  // ✅ Google Sign In (ONLY CHANGE HERE)
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
+    // Force account chooser so users can pick among multiple Google accounts
+    provider.setCustomParameters({ prompt: "select_account" });
     try {
-      await signInWithPopup(auth, provider);
-      alert("Signed in with Google!");
-      navigate("/Home");
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const token = await user.getIdToken();
+
+      const userData = {
+        full_name: user.displayName || user.email || "",
+        email: user.email || "",
+        uid: user.uid,
+      };
+
+      localStorage.setItem("access_token", token);
+      localStorage.setItem("user_data", JSON.stringify(userData));
+      localStorage.setItem("is_guest", "false");
+
+      navigate("/home", { replace: true });
+
     } catch (error) {
       alert(error.message);
     }
   };
 
-  // ✅ Forgot Password Logic
+  // ✅ Forgot Password Logic (UNCHANGED)
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     if (!resetEmail) {
@@ -115,11 +142,10 @@ export default function SignInPage() {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2.5 rounded-xl text-white font-semibold text-sm transition-all duration-300 ${
-              loading
+            className={`w-full py-2.5 rounded-xl text-white font-semibold text-sm transition-all duration-300 ${loading
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700"
-            }`}
+              }`}
           >
             {loading ? "Signing In..." : "Sign In"}
           </button>
@@ -142,7 +168,7 @@ export default function SignInPage() {
         </div>
 
         <p className="text-center text-sm text-gray-600 mt-4">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <Link
             to="/signup"
             className="text-cyan-700 hover:text-cyan-800 font-semibold"

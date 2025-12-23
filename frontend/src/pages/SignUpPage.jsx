@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase"; // ✅ your firebase.js file
 
 export default function SignUpPage() {
@@ -93,24 +93,30 @@ export default function SignUpPage() {
       console.log("Firebase signup successful");
 
       // ✅ 2. Register user in your FastAPI backend
-      const response = await fetch("http://127.0.0.1:8000/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          full_name: formData.fullName,
-          email: formData.email,
-          phone: null,
-          password: formData.password,
-          confirm_password: formData.confirmPassword,
-        }),
-      });
+      try {
+        const response = await fetch("http://127.0.0.1:8000/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            full_name: formData.fullName,
+            email: formData.email,
+            phone: null,
+            password: formData.password,
+            confirm_password: formData.confirmPassword,
+          }),
+        });
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.detail || "Signup failed");
+        if (!response.ok) {
+          const error = await response.json();
+          console.warn("Backend signup failed:", error);
+          // Continue anyway since Firebase account is created
+        }
+      } catch (backendError) {
+        console.warn("Backend signup error:", backendError);
+        // Continue anyway since Firebase account is created
       }
 
-      console.log("Backend signup successful");
+      console.log("Signup process completed");
       setShowSuccess(true);
 
       setTimeout(() => {
@@ -119,9 +125,50 @@ export default function SignUpPage() {
 
     } catch (error) {
       console.error("Signup error:", error);
-      alert(error.message);
+
+      // Better error messages for common Firebase errors
+      let errorMessage = "Signup failed. Please try again.";
+
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "This email is already registered. Please sign in instead or use a different email.";
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "Password is too weak. Please use a stronger password.";
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "Invalid email address. Please check and try again.";
+      } else if (error.code === "auth/operation-not-allowed") {
+        errorMessage = "Email/password accounts are not enabled. Please contact support.";
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      alert(errorMessage);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // ✅ Google Sign In logic (Same as SignInPage)
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const token = await user.getIdToken();
+
+      const userData = {
+        full_name: user.displayName || user.email || "",
+        email: user.email || "",
+        uid: user.uid,
+      };
+
+      localStorage.setItem("access_token", token);
+      localStorage.setItem("user_data", JSON.stringify(userData));
+      localStorage.setItem("is_guest", "false");
+
+      navigate("/home", { replace: true });
+    } catch (error) {
+      alert(error.message);
     }
   };
 
@@ -225,15 +272,14 @@ export default function SignUpPage() {
                     <div className="flex justify-between text-xs mb-1">
                       <span className="text-gray-600">Password strength:</span>
                       <span
-                        className={`font-medium ${
-                          passwordStrength <= 1
-                            ? "text-red-500"
-                            : passwordStrength === 2
+                        className={`font-medium ${passwordStrength <= 1
+                          ? "text-red-500"
+                          : passwordStrength === 2
                             ? "text-orange-500"
                             : passwordStrength === 3
-                            ? "text-yellow-500"
-                            : "text-green-500"
-                        }`}
+                              ? "text-yellow-500"
+                              : "text-green-500"
+                          }`}
                       >
                         {getPasswordStrengthText(passwordStrength)}
                       </span>
@@ -292,11 +338,10 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 disabled={loading || !formData.agreeToTerms}
-                className={`w-full py-2.5 px-6 rounded-xl text-white font-semibold transition-all duration-300 flex items-center justify-center space-x-2 text-sm ${
-                  formData.agreeToTerms && !loading
-                    ? "bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-600/40"
-                    : "bg-gray-400 cursor-not-allowed opacity-50"
-                }`}
+                className={`w-full py-2.5 px-6 rounded-xl text-white font-semibold transition-all duration-300 flex items-center justify-center space-x-2 text-sm ${formData.agreeToTerms && !loading
+                  ? "bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 transform hover:scale-[1.02] shadow-lg hover:shadow-cyan-600/40"
+                  : "bg-gray-400 cursor-not-allowed opacity-50"
+                  }`}
               >
                 {loading ? (
                   <>
@@ -311,6 +356,28 @@ export default function SignUpPage() {
                 )}
               </button>
             </form>
+
+            <div className="mt-4 text-center">
+              <div className="flex items-center my-4">
+                <div className="flex-1 h-px bg-gray-300"></div>
+                <span className="px-3 text-xs text-gray-500 uppercase">Or</span>
+                <div className="flex-1 h-px bg-gray-300"></div>
+              </div>
+
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-full flex items-center justify-center gap-2 py-2 border rounded-xl border-gray-400 hover:bg-gray-100 transition-colors"
+              >
+                <img
+                  src="https://www.svgrepo.com/show/475656/google-color.svg"
+                  alt="Google Logo"
+                  className="w-5 h-5"
+                />
+                <span className="font-medium text-gray-700 text-sm">
+                  Sign up with Google
+                </span>
+              </button>
+            </div>
 
             {/* Already have an account */}
             <div className="mt-4 text-center">
